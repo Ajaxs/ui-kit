@@ -5,9 +5,9 @@
 <script lang="ts" setup>
 import { provide, computed } from 'vue'
 
-const props = defineProps<{
-  modelValue: string | number
-}>()
+const props = defineProps({
+  modelValue: { type: [String, Number] }
+})
 
 const emit = defineEmits(['update:modelValue'])
 

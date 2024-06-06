@@ -15,11 +15,11 @@
 <script lang="ts" setup>
 import { inject } from 'vue'
 
-const props = defineProps<{
-  name?: string
-  value: string | number
-  disabled?: boolean
-}>()
+const props = defineProps({
+  name: { type: String },
+  value: { type: [String, Number] },
+  disabled: { type: Boolean }
+})
 
 const checkboxModel = inject('checkboxModel')
 </script>

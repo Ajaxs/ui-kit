@@ -1,26 +1,21 @@
 <template lang="">
-  <button :class="classes"><slot>Button</slot></button>
+  <button class="ax-button" :class="classes"><slot>Button</slot></button>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue'
 
-// const props = defineProps({
-//   size: { type: String }
-// })
-
-const props = defineProps<{
-  size?: 'small' | 'large'
-  type?: 'primary' | 'dashed'
-}>()
+const props = defineProps({
+  size: { type: String },
+  type: { type: String }
+})
 
 const classes = computed(() => {
-  const classesArr = ['ax-button']
+  const classesArr = []
 
   if (props.size) {
     classesArr.push(`ax-size-${props.size}`)
   }
-
   if (props.type) {
     classesArr.push(`ax-type-${props.type}`)
   }
