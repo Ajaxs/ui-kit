@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="page">
     <h3>Buttons</h3>
     <h4>Buttons type</h4>
     <div class="items">
@@ -54,6 +54,35 @@
       </ax-checkbox-group>
     </div>
     <div class="model">Checkbox Group Model: {{ checkboxGroup }}</div>
+
+    <h3>Select</h3>
+    <h4>Basic</h4>
+    <div class="items">
+      <ax-select class="w200" v-model="selectedColor" :items="selectItems"></ax-select>
+    </div>
+    <div class="model">Select Model: {{ selectedColor }}</div>
+
+    <h4>Multiple</h4>
+    <div class="items">
+      <ax-select
+        class="w200"
+        v-model="selectedColorMultiple"
+        :items="selectItems"
+        multiple
+        filterable
+      ></ax-select>
+      <ax-select
+        class="w200"
+        v-model="selectedColorMultiple"
+        :items="selectItems"
+        multiple
+        filterable
+        chips
+        clearable
+      ></ax-select>
+    </div>
+
+    <div class="model">Select Model: {{ selectedColorMultiple }}</div>
   </div>
 </template>
 
@@ -64,19 +93,37 @@ import AxRadioGroup from '@/components/radio/RadioGroup.vue'
 import AxRadio from '@/components/radio/Radio.vue'
 import AxCheckboxGroup from '@/components/checkbox/CheckboxGroup.vue'
 import AxCheckbox from '@/components/checkbox/Checkbox.vue'
+import AxSelect from '@/components/select/Select.vue'
 
 const radioGroup = ref<string>('1')
 const checkboxGroup = ref<string[]>(['1'])
+const selectedColor = ref<string>('green')
+const selectedColorMultiple = ref<string[]>(['green'])
+
+const selectItems = [
+  { value: 'red', label: 'Red' },
+  { value: 'green', label: 'Green' },
+  { value: 'blue', label: 'Blue' },
+  { value: 'pink', label: 'Pink' },
+  { value: 'white', label: 'White' },
+  { value: 'black', label: 'Black', disabled: true }
+]
 </script>
 
 <style scoped lang="less">
+.page {
+  padding: 25px;
+}
+
 h3 {
   font-size: 24px;
+  margin-bottom: 15px;
 }
 
 h4 {
   font-size: 18px;
   color: #666;
+  margin-bottom: 15px;
 }
 
 .items {
@@ -84,6 +131,10 @@ h4 {
   align-items: center;
   gap: 20px;
   padding: 20px 0;
+  border: 1px solid #eee;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 15px;
 }
 
 .model {
@@ -92,5 +143,10 @@ h4 {
   color: #fff;
   background-color: #bbb;
   border-radius: 5px;
+  margin-bottom: 25px;
+}
+
+.w200 {
+  width: 200px;
 }
 </style>

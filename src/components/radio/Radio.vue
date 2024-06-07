@@ -39,8 +39,8 @@ const radioModel = inject('radioModel')
       &::before {
         width: 10px;
         height: 10px;
-        top: 3px;
-        left: 3px;
+        top: 2px;
+        left: 2px;
       }
     }
   }
