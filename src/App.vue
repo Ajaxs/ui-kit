@@ -64,22 +64,52 @@
 
     <h4>Multiple</h4>
     <div class="items">
-      <ax-select
-        class="w200"
-        v-model="selectedColorMultiple"
-        :items="selectItems"
-        multiple
-        filterable
-      ></ax-select>
-      <ax-select
-        class="w200"
-        v-model="selectedColorMultiple"
-        :items="selectItems"
-        multiple
-        filterable
-        chips
-        clearable
-      ></ax-select>
+      <div>
+        <ax-select
+          class="w200"
+          v-model="selectedColorMultiple"
+          :items="selectItems"
+          multiple
+          filterable
+        ></ax-select>
+      </div>
+      <div>
+        Chips and clearable
+        <ax-select
+          class="w200"
+          v-model="selectedColorMultiple"
+          :items="selectItems"
+          multiple
+          filterable
+          chips
+          clearable
+        ></ax-select>
+      </div>
+      <div>
+        Custom item and result
+        <ax-select
+          class="w200"
+          v-model="selectedColorMultiple"
+          :items="selectItems"
+          multiple
+          filterable
+          chips
+          clearable
+        >
+          <template #result="props">
+            <div class="custom-res">
+              <div v-for="res in props.result" :key="res.value" class="custom-res-value">
+                <span class="color-icon" :style="`background-color: ${res.color};`"></span>
+                {{ res.label }}
+              </div>
+            </div>
+          </template>
+          <template #default="props">
+            <span class="color-icon" :style="`background-color: ${props.item.color};`"></span>
+            {{ props.item.label }}
+          </template>
+        </ax-select>
+      </div>
     </div>
 
     <div class="model">Select Model: {{ selectedColorMultiple }}</div>
@@ -101,12 +131,12 @@ const selectedColor = ref<string>('green')
 const selectedColorMultiple = ref<string[]>(['green'])
 
 const selectItems = [
-  { value: 'red', label: 'Red' },
-  { value: 'green', label: 'Green' },
-  { value: 'blue', label: 'Blue' },
-  { value: 'pink', label: 'Pink' },
-  { value: 'white', label: 'White' },
-  { value: 'black', label: 'Black', disabled: true }
+  { value: 'red', label: 'Red', color: '#ff2e2e' },
+  { value: 'green', label: 'Green', color: '#00b823' },
+  { value: 'blue', label: 'Blue', color: '#0c57e1' },
+  { value: 'pink', label: 'Pink', color: '#fabebe' },
+  { value: 'white', label: 'White', color: '#fff' },
+  { value: 'black', label: 'Black', color: '#000', disabled: true }
 ]
 </script>
 
@@ -135,6 +165,29 @@ h4 {
   border-radius: 5px;
   padding: 15px;
   margin-bottom: 15px;
+}
+
+.color-icon {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  margin-right: 10px;
+}
+
+.custom-res {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.custom-res-value {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  padding: 2px 5px;
 }
 
 .model {
